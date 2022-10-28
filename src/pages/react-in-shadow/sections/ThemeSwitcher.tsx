@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Label, useId } from '@fluentui/react-components';
 import { Select, SelectProps } from '@fluentui/react-components/unstable';
-import { AppTheme, ThemeName } from '../../../state/AppTheme';
+import { ThemeStore, ThemeName } from '../../../state/themeStore';
 
 const themes: ThemeName[] = [
     'Web Light',
@@ -12,16 +12,16 @@ const themes: ThemeName[] = [
 ];
 
 type ThemeSwitcherProps = {
-    appTheme: AppTheme;
+    themeStore: ThemeStore;
 }
 
-export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ appTheme }) => {
+export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ themeStore }) => {
 
     const [theme, setTheme] = React.useState(themes[0]);
     const onThemeChange: SelectProps['onChange'] = (_, data) => {
         const value = data.value as ThemeName;
         setTheme(value);
-        appTheme.setThemeName(value);
+        themeStore.setThemeName(value);
     };
 
     const selectId = useId('theme-switcher');

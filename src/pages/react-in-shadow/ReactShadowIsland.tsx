@@ -35,9 +35,9 @@ const mountShadowIsland = (shadowIsland: HTMLElement, root: HTMLElement) => {
 type ReactShadowIslandProps = {
   children: React.ReactNode;
 }
-
+const renderer = createDOMRenderer(document, { constructableStylesheets: true });
 export const ReactShadowIsland: React.FC<ReactShadowIslandProps> = ({ children }) => {
-  const renderer = React.useMemo(() => createDOMRenderer(document, { constructableStylesheets: true }), [document]);
+  // const renderer = React.useMemo(() => createDOMRenderer(document, { constructableStylesheets: true }), [document]);
 
   // React.useEffect(() => {
   //   console.log("hi there")
@@ -49,17 +49,9 @@ export const ReactShadowIsland: React.FC<ReactShadowIslandProps> = ({ children }
   return (
     <RendererProvider renderer={renderer}>
       {children}
-      {/* <FluentProvider theme={theme}>
-        {children}
-      </FluentProvider> */}
     </RendererProvider>
   );
 }
-
-// ReactDOM.render(
-//   <Wrapper/>,
-//   shadowIsland.shadowRoot!,
-// );
 
 export const mountReactShadowIsland: ReactDOM.Renderer = (element, container, _callback): React.Element => {
   const shadowIsland = document.createElement('shadow-island');

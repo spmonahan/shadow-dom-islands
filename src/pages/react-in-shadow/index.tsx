@@ -1,22 +1,31 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 
-import { Button, FluentProvider, webLightTheme } from '@fluentui/react-components';
+import { Button, FluentProvider } from '@fluentui/react-components';
 import { mountReactShadowIsland } from './ReactShadowIsland';
-import { AppTheme } from '../../state/AppTheme';
+import { RootStore } from '../../state/rootStore';
 import { observer } from 'mobx-react';
-import { ThemeSwitcher } from './sections/ThemeSwitcher';
+import { RibbonView } from './sections/Ribbon';
 
-const appTheme = new AppTheme();
+const rootStore = new RootStore();
 
-const ProviderView = observer(( { theme, children }) => {
-  return <FluentProvider theme={theme.currentTheme}>{children}</FluentProvider>;
+const ProviderView = observer(( { themeStore, children }) => {
+  console.log('1')
+  return <FluentProvider theme={themeStore.currentTheme}>{children}</FluentProvider>;
 });
 
 const App = () => {
-  return <ProviderView theme={appTheme}><Button>🎃</Button></ProviderView>;
+  return <ProviderView themeStore={rootStore.themeStore}>
+    <Button>🎃</Button>
+  </ProviderView>;
 }
 
-mountReactShadowIsland(<ProviderView theme={appTheme}><ThemeSwitcher appTheme={appTheme}/></ProviderView>, document.getElementById('theme-switcher')!);
+const Ribbon = () => {
+  return <ProviderView themeStore={rootStore.themeStore}>
+    <RibbonView themeStore={rootStore.themeStore}/>
+  </ProviderView>
+}
+
+// This order matters but I'm not sure why
 mountReactShadowIsland(<App/>, document.getElementById('root')!);
+mountReactShadowIsland(<Ribbon/>, document.getElementById('ribbon')!);
 

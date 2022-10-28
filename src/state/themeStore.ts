@@ -11,7 +11,7 @@ const themeMap: Record<ThemeName, Theme> = {
     'Teams High Contrast': teamsHighContrastTheme,
 };
 
-export class AppTheme {
+export class ThemeStore {
 
     private currentThemeName: ThemeName;
 
