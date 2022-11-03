@@ -6,8 +6,41 @@
     <title>React In Shadow</title>
   </head>
   <body>
-    <div id="ribbon"></div>
-    <div id="root"></div>
-    <div id="list"></div>
+    <shadow-island id="ribbon"></shadow-island>
+    <shadow-island id="list"></shadow-island>
+    <shadow-island id="message"></shadow-island>
+    
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+
+        display: grid;
+        grid-template: "ribbon ribbon"
+                       "main   main"
+                       "main   main";
+        grid-template-rows: 200px 1fr 1fr;
+        grid-template-columns: 300px 1fr;
+      }
+
+      /* App-level styles */
+      #ribbon {
+        grid-area: ribbon;
+        border: 8px solid green;
+      }
+
+      #list {
+        grid-area: list;
+      }
+
+      #message {
+        grid-area: main;
+        border: 8px solid hotpink
+      }
+
+    </style>
   </body>
 </html>

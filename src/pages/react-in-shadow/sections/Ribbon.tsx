@@ -1,10 +1,11 @@
 import * as React from "react";
-import { Button, TabList, Tab, TabValue, TabListProps } from '@fluentui/react-components';
+import { Button, TabList, Tab, TabValue, TabListProps, Text } from '@fluentui/react-components';
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { observer } from 'mobx-react';
 
 const ThemeSwitcherPanel = ({ themeStore }) => {
     return (<div role="tabpanel" aria-labelledby="theme-switcher-tab">
+      <Text size={400}>(Shadow DOM 1)</Text><br/>
         <ThemeSwitcher themeStore={themeStore}/>
         </div>);
 }
