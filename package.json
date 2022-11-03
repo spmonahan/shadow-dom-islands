@@ -5,7 +5,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack serve --config webpack/webpack.config.js --mode development"
+    "start": "webpack serve --config webpack/webpack.config.js --mode development",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@fluentui/react": "^8.98.7",
@@ -14,6 +15,8 @@
     "@microsoft/fast-element": "^1.10.4",
     "mobx": "^6.6.2",
     "mobx-react": "^7.5.3",
+    "patch-package": "^6.5.0",
+    "postinstall-postinstall": "^2.1.0",
     "random-seedable": "1.0.8",
     "react": "17.0.2",
     "react-dom": "17.0.2"
