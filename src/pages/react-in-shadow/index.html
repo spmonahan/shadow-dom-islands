@@ -7,7 +7,7 @@
   </head>
   <body>
     <shadow-island id="ribbon"></shadow-island>
-    <shadow-island id="list"></shadow-island>
+    <div id="list"></div>
     <shadow-island id="message"></shadow-island>
     
     <style>
@@ -20,8 +20,8 @@
 
         display: grid;
         grid-template: "ribbon ribbon"
-                       "main   main"
-                       "main   main";
+                       "list   main"
+                       "list   main";
         grid-template-rows: 200px 1fr 1fr;
         grid-template-columns: 300px 1fr;
       }
@@ -36,9 +36,18 @@
         grid-area: list;
       }
 
+      #list > shadow-island {
+        width: 100%;
+        height: 100%;
+      }
+
       #message {
         grid-area: main;
         border: 8px solid hotpink
+      }
+
+      .am-i-in-shadow {
+        background-color: yellowgreen;
       }
 
     </style>

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { createRoot } from 'react-dom/client';
 
 import { Button, FluentProvider } from '@fluentui/react-components';
 import { mountReactShadowIsland } from './ReactShadowIsland';
@@ -42,6 +43,8 @@ const Message = () => {
 }
 
 mountReactShadowIsland(<Ribbon/>, document.getElementById('ribbon')!);
-// mountReactShadowIsland(<List/>, document.getElementById('list')!);
 mountReactShadowIsland(<Message/>, document.getElementById('message')!);
+
+const root = createRoot(document.getElementById('list')!);
+root.render(<another-shadow-island><div className="am-i-in-shadow">I am slotted into the shadow dom but global styles still apply to me :(</div></another-shadow-island>);
 
