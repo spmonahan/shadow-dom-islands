@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import { createDOMRenderer, RendererProvider } from '@griffel/react';
 import './shadow-island';
@@ -42,8 +42,6 @@ export const mountReactShadowIsland: ReactDOM.Renderer = (element, container, _c
   const shadowIsland = container;
   observeStylesheets(shadowIsland);
 
-  return ReactDOM.render(
-    <ReactShadowIsland styleTagTarget={shadowIsland}>{element}</ReactShadowIsland>,
-    shadowIsland.shadowRoot!,
-  );
+  const root = createRoot(shadowIsland.shadowRoot!);
+  root.render(<ReactShadowIsland styleTagTarget={shadowIsland}>{element}</ReactShadowIsland>);
 };
