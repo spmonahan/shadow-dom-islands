@@ -13,6 +13,11 @@ declare global {
           React.HTMLAttributes<HTMLElement>,
           HTMLElement
         >;
+
+        'declarative-element': React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        >;
       }
     }
   }

@@ -45,6 +45,10 @@ const Message = () => {
 mountReactShadowIsland(<Ribbon/>, document.getElementById('ribbon')!);
 mountReactShadowIsland(<Message/>, document.getElementById('message')!);
 
-const root = createRoot(document.getElementById('list')!);
-root.render(<another-shadow-island><div className="am-i-in-shadow">I am slotted into the shadow dom but global styles still apply to me :(</div></another-shadow-island>);
+const declarativeRoot = createRoot(document.getElementById('declarative')!);
+declarativeRoot.render(<declarative-element>
+  <template shadowroot="open">
+    <div className="am-i-in-shadow">I am declarative shadow DOM in React. You will not see me rendered.</div>
+  </template>
+</declarative-element>);
 
