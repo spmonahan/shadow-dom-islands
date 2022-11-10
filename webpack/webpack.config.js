@@ -73,7 +73,7 @@ const createConfig = (env, argv) => {
 
   if (!isProd) {
     config.devServer = {
-      port: 9000,
+      port: argv.port ? Number(argv.port) : 9000,
       open: false,
       hot: true,
       compress: true,
