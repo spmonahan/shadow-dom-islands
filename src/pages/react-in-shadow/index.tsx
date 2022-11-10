@@ -1,7 +1,8 @@
 import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 
 import { Button, FluentProvider } from '@fluentui/react-components';
-import { mountReactShadowIsland } from './ReactShadowIsland';
+import root from 'react-shadow';
 import { RootStore } from '../../state/rootStore';
 import { observer } from 'mobx-react';
 import { RibbonView } from './sections/Ribbon';
@@ -41,7 +42,18 @@ const Message = () => {
   </ProviderView>
 }
 
-mountReactShadowIsland(<Ribbon/>, document.getElementById('ribbon')!);
-// mountReactShadowIsland(<List/>, document.getElementById('list')!);
-mountReactShadowIsland(<Message/>, document.getElementById('message')!);
+const App = () => {
+  return <>
+    <root.div id="ribbon"><Ribbon/></root.div>
+    <root.div id="message"><Message/></root.div>
+  </>
+};
+
+ReactDOM.render(<App/>, document.getElementById('root')!);
+
+
+
+// mountReactShadowIsland(<Ribbon/>, document.getElementById('ribbon')!);
+// // mountReactShadowIsland(<List/>, document.getElementById('list')!);
+// mountReactShadowIsland(<Message/>, document.getElementById('message')!);
 

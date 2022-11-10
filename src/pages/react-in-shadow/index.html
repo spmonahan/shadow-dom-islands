@@ -6,9 +6,7 @@
     <title>React In Shadow</title>
   </head>
   <body>
-    <shadow-island id="ribbon"></shadow-island>
-    <shadow-island id="list"></shadow-island>
-    <shadow-island id="message"></shadow-island>
+    <div id="root"></div>
     
     <style>
       html,
@@ -18,6 +16,11 @@
         width: 100vw;
         height: 100vh;
 
+        
+      }
+
+      #root {
+        height: 100%;
         display: grid;
         grid-template: "ribbon ribbon"
                        "main   main"
