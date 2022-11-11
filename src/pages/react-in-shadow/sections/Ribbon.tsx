@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Button, TabList, Tab, TabValue, TabListProps, Text } from '@fluentui/react-components';
 import { ThemeSwitcher } from "./ThemeSwitcher";
-import { observer } from 'mobx-react';
 
 const ThemeSwitcherPanel = ({ themeStore }) => {
     return (<div role="tabpanel" aria-labelledby="theme-switcher-tab">
@@ -10,7 +9,7 @@ const ThemeSwitcherPanel = ({ themeStore }) => {
         </div>);
 }
 
-export const Ribbon = ({ themeStore }) => {
+export const RibbonView = () => {
 
     const [selectedValue, setSelectedValue] = React.useState<TabValue>('theme');
     const onTabSelect: TabListProps['onTabSelect'] = (_e, data) => {
@@ -23,12 +22,8 @@ export const Ribbon = ({ themeStore }) => {
         <Tab id="tab3" value="tab3">Tab 3</Tab>
       </TabList>
       <div>
-        {selectedValue === "theme" && <ThemeSwitcherPanel themeStore={themeStore}/>}
+        {selectedValue === "theme" && <ThemeSwitcherPanel />}
         {selectedValue === "tab2" && <Button>🎃</Button>}
       </div>
     </>)
 };
-
-export const RibbonView = observer(({ themeStore }) => {
-    return <Ribbon themeStore={themeStore}/>
-});

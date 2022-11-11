@@ -2,30 +2,26 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import { Button, FluentProvider } from '@fluentui/react-components';
-import root from 'react-shadow';
+import root from 'react-shadow/griffel';
 import { RootStore } from '../../state/rootStore';
 import { observer } from 'mobx-react';
 import { RibbonView } from './sections/Ribbon';
 import { ListView } from './sections/List';
 import { MessageView } from './sections/Message';
+import { ReactShadowFluentThemeProvider, useShadowContext } from './ReactShadowFluentThemeProvider';
 
 const rootStore = new RootStore();
 
 const ProviderView = observer(( { themeStore, children, targetElement }) => {
-  console.log('1')
   return <FluentProvider targetElement={targetElement} style={{height: '100%'}} theme={themeStore.currentTheme}>{children}</FluentProvider>;
 });
 
-// const App = () => {
-//   return <ProviderView themeStore={rootStore.themeStore}>
-//     <Button>🎃</Button>
-//   </ProviderView>;
-// }
-
 const Ribbon = () => {
-  return <ProviderView themeStore={rootStore.themeStore} targetElement={document.getElementById('ribbon')!}>
-    <RibbonView themeStore={rootStore.themeStore}/>
-  </ProviderView>
+  
+  const { theme } = useShadowContext();
+  return <FluentProvider style={{ height: '100%' }}  targetElement={document.getElementById('ribbon')!} theme={theme}>
+    <RibbonView/>
+  </FluentProvider>
 }
 
 
@@ -37,23 +33,20 @@ const List = () => {
 }
 
 const Message = () => {
-  return <ProviderView themeStore={rootStore.themeStore} targetElement={document.getElementById('message')!}>
-    <MessageView />
-  </ProviderView>
+  const { theme } = useShadowContext();
+  return <FluentProvider style={{ height: '100%' }} targetElement={document.getElementById('message')!} theme={theme}>
+    <MessageView/>
+  </FluentProvider>
 }
 
 const App = () => {
+  
   return <>
-    <root.div id="ribbon"><Ribbon/></root.div>
-    <root.div id="message"><Message/></root.div>
+    <ReactShadowFluentThemeProvider>
+      <root.div id="ribbon"><Ribbon/></root.div>
+      <root.div id="message"><Message/></root.div>
+    </ReactShadowFluentThemeProvider>
   </>
 };
 
 ReactDOM.render(<App/>, document.getElementById('root')!);
-
-
-
-// mountReactShadowIsland(<Ribbon/>, document.getElementById('ribbon')!);
-// // mountReactShadowIsland(<List/>, document.getElementById('list')!);
-// mountReactShadowIsland(<Message/>, document.getElementById('message')!);
-

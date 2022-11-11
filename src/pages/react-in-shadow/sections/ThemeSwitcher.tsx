@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Label, useId } from '@fluentui/react-components';
 import { Select, SelectProps } from '@fluentui/react-components/unstable';
-import { ThemeStore, ThemeName } from '../../../state/themeStore';
+import { ThemeName } from '../../../state/themeStore';
+import {  useShadowContext } from '../ReactShadowFluentThemeProvider';
 
 const themes: ThemeName[] = [
     'Web Light',
@@ -11,17 +12,16 @@ const themes: ThemeName[] = [
     'Teams High Contrast',
 ];
 
-type ThemeSwitcherProps = {
-    themeStore: ThemeStore;
-}
+type ThemeSwitcherProps = {};
 
-export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ themeStore }) => {
+export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = () => {
 
-    const [theme, setTheme] = React.useState(themes[0]);
+    const { setTheme } = useShadowContext();
+    const [theme, setLocalTheme] = React.useState(themes[0]);
     const onThemeChange: SelectProps['onChange'] = (_, data) => {
         const value = data.value as ThemeName;
+        setLocalTheme(value);
         setTheme(value);
-        themeStore.setThemeName(value);
     };
 
     const selectId = useId('theme-switcher');
